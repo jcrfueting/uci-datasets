@@ -13,10 +13,7 @@ for cls in [
 ]:
     name = cls.__name__
     dataset = cls()
-    data = np.concatenate((
-        dataset.trn.x,
-        dataset.val.x,
-        dataset.tst.x,
-    ))
+    for subset in ["trn","val","tst"]:
+        np.save(f"{name}_{subset}.npy", getattr(dataset, subset).x)
 
-    np.save(f'{name}.npy', data)
+
